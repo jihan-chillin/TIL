@@ -15,7 +15,12 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
     console.log("user connected!!")
+    // broadcast - 접속한 모든 사용자들에게 메세지 emit
+    socket.broadcast.emit("hi")
+
     socket.on("chatMsg", (msg) => {
+        // chatMsg 이벤트 수신메세지
+        io.emit("chatMsg", msg)
         console.log(`message : ${msg}`)
     })
 })
