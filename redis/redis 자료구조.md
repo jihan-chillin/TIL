@@ -94,3 +94,44 @@
 > rpush mypages www.kozub.tistory.com <br/>
 > lrange mypages -3 -1 # 최근 방문한 페이지 3개 <br/>
 ![최근 방문한 ](./images/4.png)
+
+# 3. Set
+집합이랑 같은 개념이라고 보면 됨. 따라서, 아래와 같은 특성을 가지고 있음.
+- 중복 없음
+- 순서 없음
+
+## 3.1 set 관련 명령어
+
+### set에 값 추가
+> sadd memberlist member1 <br/>
+> sadd memberlist member1 <br/>
+> sadd memberlist member2
+### set 조회
+- 중복없이 요소가 추가된 것을 알 수 있음.
+> smembers memberlist <br/>
+![중복없이 추가된 memberlist 요소](./images/5.png)
+### set 요소 제거
+> srem memberlist member2
+### set 요소 개수 조회
+> scard memberlist
+### 특정요소가 set 안에 있는 조회
+> sismember memberlist member1 ->  1 (존재 O) <br/>
+> sismember memberlist member2 ->  0 (존재 X)
+
+<br/>
+
+## 3.2 redis의 set 활용 : 좋아요
+특정 사용자가 중복으로 좋아요를 누를 수 없게끔 하기 위해 "좋아요" 기능을 set으로 구현.
+
+> sadd likes:posting:1 member1<br/>
+> sadd likes:posting:1 member2<br/>
+> sadd likes:posting:1 member1<br/>
+
+### 좋아요 개수
+> scard likes:posting:1
+
+### 좋아요 분기처리 (좋아요 눌렀는지 안눌렀는지)
+> sismember likes:posting:1 member1 # 1이면 좋아요, 0이면 좋아요 X
+
+## 3.3 그 외 활용
+- 매일 방문자 수 계산

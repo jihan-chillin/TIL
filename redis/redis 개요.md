@@ -11,3 +11,16 @@
     - key-value는 구조적으로 해시 테이블([부록 2](부록.md#부록-2-해시테이블))을 사용함으로서 매우 빠른 속도로 데이터 검색 가능
 - Single Thread([부록 3](부록.md#부록-3-single-thread)) 구조로 동시성 이슈 발생X
 - 윈도우 서버에서는 지원하지 않고, linux서버 및 macOS등에서 사용 가능
+
+# redis 접속
+### redis설치(linux)
+> sudo apt-get install redis-server
+### redis접속
+> redis-cli
+
+### redis도커설치(윈도우, mac)
+> docker run --name redis-container -d -p 6379:6379 redis
+### docker 컨네이너 조회
+> docker ps
+### redis도커 접속
+> docker exec -it <containerID> redis-cli
